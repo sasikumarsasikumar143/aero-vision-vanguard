@@ -3,6 +3,7 @@ import { ArrowRight, Play, Award, Clock, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ThreeJsScene from './ThreeJsScene';
 import aerospaceHero from '@/assets/aerospace-hero.jpg';
+import apAerospaceLogo from '@/assets/ap-aerospace-logo.png';
 
 export default function HeroSection() {
   return (
@@ -31,6 +32,26 @@ export default function HeroSection() {
             transition={{ duration: 0.8 }}
             className="text-white"
           >
+            <motion.div
+              className="mb-8 flex justify-center lg:justify-start"
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.1 }}
+            >
+              <motion.div
+                className="relative group"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              >
+                <img 
+                  src={apAerospaceLogo} 
+                  alt="AP Aerospace" 
+                  className="h-24 w-24 animate-float hover:animate-pulse-glow transition-all duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-aerospace-blue to-aerospace-glow opacity-20 rounded-full animate-pulse"></div>
+              </motion.div>
+            </motion.div>
+            
             <motion.h1 
               className="text-5xl md:text-7xl font-bold leading-tight mb-6"
               initial={{ opacity: 0, y: 30 }}
@@ -38,7 +59,7 @@ export default function HeroSection() {
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               The Next
-              <span className="block text-gradient bg-gradient-to-r from-white to-aerospace-light bg-clip-text text-transparent">
+              <span className="block text-gradient bg-gradient-to-r from-white via-aerospace-light to-aerospace-glow bg-clip-text text-transparent animate-pulse">
                 Generation of
               </span>
               <span className="block">Aerospace</span>
@@ -59,14 +80,27 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              <Button size="lg" className="btn-aerospace text-lg px-8 py-4">
-                Explore Services
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-aerospace-blue text-lg px-8 py-4">
-                <Play className="mr-2 h-5 w-5" />
-                Watch Demo
-              </Button>
+              <motion.div
+                whileHover={{ scale: 1.05, boxShadow: "var(--shadow-hover)" }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              >
+                <Button size="lg" className="btn-aerospace text-lg px-8 py-4 relative overflow-hidden group">
+                  <span className="relative z-10">Explore Services</span>
+                  <ArrowRight className="ml-2 h-5 w-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-aerospace-glow to-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                </Button>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              >
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 hover:text-aerospace-glow text-lg px-8 py-4 backdrop-blur-sm group">
+                  <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+                  Watch Demo
+                </Button>
+              </motion.div>
             </motion.div>
 
             {/* Stats */}

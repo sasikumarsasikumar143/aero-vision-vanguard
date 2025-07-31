@@ -68,16 +68,21 @@ export default function ServicesSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.2 }}
             >
-              <Card className="card-aerospace overflow-hidden h-full">
+              <Card className="card-aerospace overflow-hidden h-full group cursor-pointer border border-transparent hover:border-aerospace-blue/20 transition-all duration-500">
                 <div className="aspect-video bg-gradient-primary relative overflow-hidden">
                   <img 
                     src={service.image} 
                     alt={service.title}
-                    className="w-full h-full object-cover opacity-80"
+                    className="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-aerospace-blue/80 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-aerospace-blue/80 to-transparent group-hover:from-aerospace-blue/90 transition-colors duration-300"></div>
                   <div className="absolute bottom-4 left-4">
-                    <service.icon className="h-8 w-8 text-white mb-2" />
+                    <motion.div
+                      whileHover={{ rotate: 360, scale: 1.1 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <service.icon className="h-8 w-8 text-white mb-2 group-hover:animate-float" />
+                    </motion.div>
                     <div className="text-white font-semibold text-sm uppercase tracking-wide">
                       {service.title}
                     </div>
@@ -85,16 +90,18 @@ export default function ServicesSection() {
                 </div>
                 
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold text-aerospace-blue mb-3">
+                  <h3 className="text-xl font-semibold text-aerospace-blue mb-3 group-hover:text-aerospace-glow transition-colors duration-300">
                     {service.subtitle}
                   </h3>
-                  <p className="text-muted-foreground mb-4">
+                  <p className="text-muted-foreground mb-4 group-hover:text-foreground transition-colors duration-300">
                     {service.description}
                   </p>
-                  <Button variant="outline" className="group">
-                    View Detail
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
+                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <Button variant="outline" className="group/btn w-full">
+                      View Detail
+                      <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                    </Button>
+                  </div>
                 </div>
               </Card>
             </motion.div>

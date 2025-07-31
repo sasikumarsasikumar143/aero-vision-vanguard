@@ -93,22 +93,44 @@ export default function AboutSection() {
             className="space-y-8"
           >
             <div className="grid grid-cols-2 gap-6">
-              <div className="text-center p-6 bg-white rounded-xl shadow-lg">
-                <div className="text-4xl font-bold text-aerospace-blue mb-2">11</div>
-                <div className="text-muted-foreground">Years of Experience</div>
-              </div>
-              <div className="text-center p-6 bg-white rounded-xl shadow-lg">
-                <div className="text-4xl font-bold text-aerospace-blue mb-2">32+</div>
-                <div className="text-muted-foreground">Machines</div>
-              </div>
+              {[
+                { number: "11", label: "Years of Experience", delay: 0.1 },
+                { number: "32+", label: "Machines", delay: 0.2 }
+              ].map((stat, index) => (
+                <motion.div 
+                  key={index}
+                  className="text-center p-6 bg-white rounded-xl shadow-lg hover:shadow-glow hover:scale-105 transition-all duration-300 group cursor-pointer"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: stat.delay }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -5 }}
+                >
+                  <motion.div 
+                    className="text-4xl font-bold text-aerospace-blue mb-2 group-hover:text-aerospace-glow transition-colors duration-300"
+                    animate={{ scale: [1, 1.1, 1] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: index * 0.5 }}
+                  >
+                    {stat.number}
+                  </motion.div>
+                  <div className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">{stat.label}</div>
+                </motion.div>
+              ))}
             </div>
             
-            <div className="bg-white rounded-xl p-6 shadow-lg">
-              <h4 className="text-xl font-semibold text-aerospace-blue mb-4">Manufacturing in:</h4>
-              <p className="text-muted-foreground">
+            <motion.div 
+              className="bg-white rounded-xl p-6 shadow-lg hover:shadow-glow transition-all duration-300 group cursor-pointer"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.02 }}
+            >
+              <h4 className="text-xl font-semibold text-aerospace-blue mb-4 group-hover:text-aerospace-glow transition-colors duration-300">Manufacturing in:</h4>
+              <p className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">
                 Precision Machined Components & CNC Wire Cutting
               </p>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
 
@@ -126,16 +148,20 @@ export default function AboutSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
             >
-              <Card className="card-aerospace text-center h-full">
+              <Card className="card-aerospace text-center h-full group cursor-pointer border border-transparent hover:border-aerospace-blue/20">
                 <div className="mb-4">
-                  <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto">
-                    <feature.icon className="h-8 w-8 text-white" />
-                  </div>
+                  <motion.div 
+                    className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300"
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <feature.icon className="h-8 w-8 text-white group-hover:animate-float" />
+                  </motion.div>
                 </div>
-                <h3 className="text-xl font-semibold text-aerospace-blue mb-3">
+                <h3 className="text-xl font-semibold text-aerospace-blue mb-3 group-hover:text-aerospace-glow transition-colors duration-300">
                   {feature.title}
                 </h3>
-                <p className="text-muted-foreground">
+                <p className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">
                   {feature.description}
                 </p>
               </Card>
