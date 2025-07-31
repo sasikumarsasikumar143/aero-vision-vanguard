@@ -8,35 +8,63 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Aerospace Blue & White Theme */
+    --background: 210 40% 98%;
+    --foreground: 220 25% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 220 25% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 220 25% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary: Deep Aerospace Blue */
+    --primary: 220 80% 25%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 220 70% 35%;
+    --primary-dark: 220 90% 15%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary: Light Blue/White */
+    --secondary: 210 60% 96%;
+    --secondary-foreground: 220 25% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted: Soft Blue-Gray */
+    --muted: 210 40% 94%;
+    --muted-foreground: 220 15% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent: Electric Blue */
+    --accent: 210 100% 70%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 20% 88%;
+    --input: 220 20% 88%;
+    --ring: 220 80% 25%;
 
-    --radius: 0.5rem;
+    /* Design System Colors */
+    --aerospace-blue: 220 80% 25%;
+    --aerospace-light: 210 100% 70%;
+    --aerospace-glow: 210 100% 85%;
+    --aerospace-dark: 220 90% 15%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(220 80% 25%), hsl(210 100% 70%));
+    --gradient-secondary: linear-gradient(180deg, hsl(210 40% 98%), hsl(210 60% 96%));
+    --gradient-accent: linear-gradient(90deg, hsl(210 100% 70%), hsl(220 80% 25%));
+    --gradient-dark: linear-gradient(135deg, hsl(220 90% 15%), hsl(220 80% 25%));
+
+    /* Shadows */
+    --shadow-primary: 0 10px 30px -10px hsl(220 80% 25% / 0.3);
+    --shadow-glow: 0 0 40px hsl(210 100% 70% / 0.4);
+    --shadow-elegant: 0 20px 60px -15px hsl(220 80% 25% / 0.2);
+
+    /* Animations */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +129,78 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+@layer components {
+  /* Aerospace Navigation Animation */
+  .nav-link {
+    @apply relative overflow-hidden;
+  }
+  
+  .nav-link::before {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-accent scale-x-0 transition-transform duration-300 origin-left;
+  }
+  
+  .nav-link:hover::before {
+    @apply scale-x-100;
+  }
+
+  /* Aerospace Button Variants */
+  .btn-aerospace {
+    @apply bg-gradient-to-r from-aerospace-blue to-aerospace-light text-white px-8 py-4 rounded-lg font-semibold;
+    @apply shadow-elegant hover:shadow-glow transition-all duration-300;
+    @apply hover:scale-105 active:scale-95;
+  }
+
+  .btn-aerospace-outline {
+    @apply border-2 border-aerospace-blue text-aerospace-blue px-8 py-4 rounded-lg font-semibold;
+    @apply hover:bg-aerospace-blue hover:text-white transition-all duration-300;
+    @apply hover:shadow-primary;
+  }
+
+  /* Card Hover Effects */
+  .card-aerospace {
+    @apply bg-card border border-border rounded-xl p-6;
+    @apply hover:shadow-elegant transition-all duration-300;
+    @apply hover:-translate-y-2;
+  }
+
+  /* Floating Animation */
+  .float-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  /* Pulse Glow */
+  .pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulseGlow {
+    from { box-shadow: 0 0 20px hsl(var(--aerospace-light) / 0.5); }
+    to { box-shadow: 0 0 40px hsl(var(--aerospace-light) / 0.8); }
+  }
+
+  /* Text Gradient */
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Aerospace Grid */
+  .aerospace-grid {
+    background-image: 
+      linear-gradient(hsl(var(--aerospace-blue) / 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--aerospace-blue) / 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
   }
 }
